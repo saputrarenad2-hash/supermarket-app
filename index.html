@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperMart - Toko Online Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-gradient shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-white p-2 rounded-lg">
+                        <i class="fas fa-shopping-basket text-2xl text-blue-600"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white">SuperMart</h1>
+                </div>
+                
+                <div class="flex-1 max-w-xl mx-4">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Cari produk..." class="w-full py-2 px-4 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-white">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="cart-toggle" class="relative bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition">
+                        <i class="fas fa-shopping-cart text-white text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <button class="bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition">
+                        <i class="fas fa-user text-white text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="mb-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl p-6 text-white shadow-lg">
+            <div class="max-w-xl">
+                <h2 class="text-3xl font-bold mb-2">Belanja Online Mudah & Cepat</h2>
+                <p class="mb-4">Dapatkan produk berkualitas dengan harga terbaik. Pengiriman cepat ke seluruh Indonesia.</p>
+                <div class="flex space-x-2">
+                    <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Diskon hingga 50%</span>
+                    <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Gratis Ongkir</span>
+                    <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Checkout via WhatsApp</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Category Filters -->
+        <section class="mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">Kategori Produk</h3>
+            <div class="flex flex-wrap gap-2" id="category-filters">
+                <button class="filter-btn active px-4 py-2 bg-white rounded-full shadow-sm transition" data-category="all">Semua</button>
+                <!-- Kategori akan diisi oleh JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Product Grid -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold text-gray-800">Produk Terbaru</h3>
+                <div class="flex items-center space-x-2">
+                    <span id="product-count" class="text-gray-600">0 produk</span>
+                    <div class="relative">
+                        <select id="sort-select" class="appearance-none bg-white border border-gray-300 rounded-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="default">Urutkan</option>
+                            <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                            <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                            <option value="name">Nama A-Z</option>
+                            <option value="rating">Rating Tertinggi</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-2 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Loader -->
+            <div id="loader" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skeleton Loaders -->
+                <div class="product-card">
+                    <div class="skeleton-loader h-48 rounded-t-lg"></div>
+                    <div class="p-4">
+                        <div class="skeleton-loader h-4 w-3/4 mb-2 rounded"></div>
+                        <div class="skeleton-loader h-4 w-1/2 mb-4 rounded"></div>
+                        <div class="skeleton-loader h-6 w-1/3 rounded"></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="skeleton-loader h-48 rounded-t-lg"></div>
+                    <div class="p-4">
+                        <div class="skeleton-loader h-4 w-3/4 mb-2 rounded"></div>
+                        <div class="skeleton-loader h-4 w-1/2 mb-4 rounded"></div>
+                        <div class="skeleton-loader h-6 w-1/3 rounded"></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="skeleton-loader h-48 rounded-t-lg"></div>
+                    <div class="p-4">
+                        <div class="skeleton-loader h-4 w-3/4 mb-2 rounded"></div>
+                        <div class="skeleton-loader h-4 w-1/2 mb-4 rounded"></div>
+                        <div class="skeleton-loader h-6 w-1/3 rounded"></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="skeleton-loader h-48 rounded-t-lg"></div>
+                    <div class="p-4">
+                        <div class="skeleton-loader h-4 w-3/4 mb-2 rounded"></div>
+                        <div class="skeleton-loader h-4 w-1/2 mb-4 rounded"></div>
+                        <div class="skeleton-loader h-6 w-1/3 rounded"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 hidden">
+                <!-- Kartu produk akan dimasukkan di sini oleh JavaScript -->
+            </div>
+            
+            <!-- No Products Message -->
+            <div id="no-products" class="text-center py-10 hidden">
+                <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600">Produk tidak ditemukan</h3>
+                <p class="text-gray-500 mt-2">Coba ubah kata kunci pencarian atau filter kategori</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="floating-whatsapp">
+        <button id="quick-whatsapp" class="whatsapp-button text-white p-4 rounded-full shadow-lg">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" id="modal-overlay"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+                <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full p-2 shadow">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <div class="p-6">
+                    <div class="md:flex md:space-x-8">
+                        <div class="md:w-2/5 flex-shrink-0">
+                            <img id="modal-image" src="https://placehold.co/400x400" alt="Product Image" class="w-full h-auto object-contain rounded-xl">
+                            <div class="flex justify-center mt-4 space-x-2">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 md:mt-0 md:w-3/5">
+                            <span id="modal-category" class="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Kategori</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-3" id="modal-product-name">Nama Produk</h3>
+                            
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-500 ml-2" id="modal-rating">4.5 (120 reviews)</span>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <span class="text-3xl font-bold price-tag" id="modal-price">Rp 0</span>
+                                <span class="text-lg text-gray-500 line-through ml-2" id="modal-original-price">Rp 0</span>
+                                <span class="text-green-600 font-semibold ml-2" id="modal-discount">0%</span>
+                            </div>
+                            
+                            <p class="text-gray-600 mt-4 leading-relaxed" id="modal-description">Deskripsi produk akan muncul di sini.</p>
+                            
+                            <div class="mt-6 flex items-center space-x-4">
+                                <div class="flex items-center border border-gray-300 rounded-lg">
+                                    <button class="quantity-btn decrease-quantity">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span id="quantity" class="px-4 py-2">1</span>
+                                    <button class="quantity-btn increase-quantity">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                
+                                <button id="modal-add-to-cart" class="flex-1 bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-cart-plus"></i>
+                                    <span>Tambah ke Keranjang</span>
+                                </button>
+                            </div>
+                            
+                            <div class="mt-6 border-t border-gray-200 pt-4">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-shipping-fast text-green-500 mr-2"></i>
+                                    <span>Gratis ongkir untuk pembelian di atas Rp 200.000</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600 mt-2">
+                                    <i class="fab fa-whatsapp text-green-500 mr-2"></i>
+                                    <span>Checkout langsung via WhatsApp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar fixed top-0 right-0 w-full sm:w-96 h-full bg-white shadow-2xl z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Keranjang Belanja</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-6">
+                <!-- Item keranjang akan dimasukkan di sini -->
+                <div id="empty-cart" class="text-center py-10">
+                    <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">Keranjang belanja Anda kosong</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span id="cart-subtotal" class="font-semibold">Rp 0</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Ongkos Kirim</span>
+                    <span id="cart-shipping" class="font-semibold">Rp 15.000</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-600">Diskon</span>
+                    <span id="cart-discount" class="font-semibold text-green-600">-Rp 0</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold border-t border-gray-200 pt-4">
+                    <span>Total</span>
+                    <span id="cart-total">Rp 0</span>
+                </div>
+                
+                <button id="checkout-btn" class="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 rounded-lg font-semibold mt-4 hover:opacity-90 transition">
+                    Checkout via WhatsApp
+                </button>
+                
+                <button id="direct-whatsapp" class="w-full whatsapp-button text-white py-3 rounded-lg font-semibold mt-3 flex items-center justify-center space-x-2">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Langsung Chat WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" id="checkout-overlay"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="checkout-modal bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+                <button id="close-checkout" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full p-2 shadow">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <div class="p-6">
+                    <!-- Checkout Steps -->
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="checkout-step completed flex flex-col items-center">
+                            <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mb-2">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-sm font-medium">Keranjang</span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                        <div class="checkout-step active flex flex-col items-center">
+                            <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center mb-2">
+                                <span>2</span>
+                            </div>
+                            <span class="text-sm font-medium">Informasi</span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                        <div class="checkout-step flex flex-col items-center">
+                            <div class="w-10 h-10 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center mb-2">
+                                <span>3</span>
+                            </div>
+                            <span class="text-sm font-medium">WhatsApp</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Checkout Content -->
+                    <div id="checkout-content">
+                        <!-- Step 1: Informasi Pengiriman -->
+                        <div id="checkout-step-1" class="checkout-step-content">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-6">Informasi Pengiriman</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
+                                    <input type="text" id="full-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="email@contoh.com" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">No. WhatsApp *</label>
+                                    <input type="tel" id="whatsapp" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="6281234567890" required>
+                                    <p class="text-xs text-gray-500 mt-1">Contoh: 6281234567890 (tanpa + atau spasi)</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kota *</label>
+                                    <select id="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        <option value="">Pilih Kota</option>
+                                        <option value="jakarta">Jakarta</option>
+                                        <option value="bandung">Bandung</option>
+                                        <option value="surabaya">Surabaya</option>
+                                        <option value="yogyakarta">Yogyakarta</option>
+                                        <option value="bali">Bali</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Lengkap *</label>
+                                    <textarea id="address" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan alamat lengkap pengiriman" required></textarea>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Catatan untuk Penjual (Opsional)</label>
+                                    <textarea id="notes" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Catatan khusus untuk penjual"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Order Summary -->
+                            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                                <h4 class="font-semibold mb-3">Ringkasan Pesanan</h4>
+                                <div id="checkout-summary">
+                                    <!-- Order items will be populated here -->
+                                </div>
+                                <div class="border-t border-gray-200 pt-3 mt-3">
+                                    <div class="flex justify-between font-semibold">
+                                        <span>Total:</span>
+                                        <span id="checkout-total">Rp 0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button id="back-to-cart" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                                    <i class="fas fa-arrow-left mr-2"></i>Kembali ke Keranjang
+                                </button>
+                                <button id="next-to-whatsapp" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                                    Lanjut ke WhatsApp <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: WhatsApp Confirmation -->
+                        <div id="checkout-step-2" class="checkout-step-content hidden">
+                            <div class="text-center py-8">
+                                <div class="success-animation w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fab fa-whatsapp text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Siap Kirim ke WhatsApp!</h3>
+                                <p class="text-gray-600 mb-6">Pesanan Anda sudah siap. Klik tombol di bawah untuk mengirim pesanan langsung ke penjual via WhatsApp.</p>
+                                
+                                <div class="bg-gray-50 rounded-lg p-6 mb-6 text-left max-w-md mx-auto">
+                                    <h4 class="font-semibold mb-4">Detail Pesanan</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span>Nama:</span>
+                                            <span id="confirm-name">-</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>No. WhatsApp:</span>
+                                            <span id="confirm-whatsapp">-</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Alamat:</span>
+                                            <span id="confirm-address" class="text-right">-</span>
+                                        </div>
+                                        <div class="flex justify-between font-semibold mt-2">
+                                            <span>Total:</span>
+                                            <span id="confirm-total">Rp 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                                    <button id="back-to-info" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                                        <i class="fas fa-edit mr-2"></i>Edit Informasi
+                                    </button>
+                                    <button id="send-whatsapp" class="whatsapp-button px-6 py-3 text-white rounded-lg flex items-center justify-center space-x-2">
+                                        <i class="fab fa-whatsapp"></i>
+                                        <span>Kirim ke WhatsApp</span>
+                                    </button>
+                                </div>
+                                
+                                <p class="text-sm text-gray-500 mt-6">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    Anda akan diarahkan ke aplikasi WhatsApp untuk menyelesaikan pemesanan
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
