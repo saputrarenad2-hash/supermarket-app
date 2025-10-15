@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - SuperMart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-gradient shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <div class="bg-white p-2 rounded-lg">
+                            <i class="fas fa-shopping-basket text-2xl text-blue-600"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-white">SuperMart</h1>
+                    </a>
+                </div>
+                
+                <nav class="flex items-center space-x-4">
+                    <a href="index.html" class="text-white hover:text-blue-200 transition">Beranda</a>
+                    <a href="about.html" class="text-white hover:text-blue-200 transition">Tentang</a>
+                    <a href="contact.html" class="text-white font-semibold">Kontak</a>
+                    <a href="address.html" class="text-white hover:text-blue-200 transition">Alamat</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Hero Section -->
+            <section class="mb-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl p-8 text-white shadow-lg">
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold mb-4">Hubungi Kami</h1>
+                    <p class="text-xl opacity-90">Kami siap membantu Anda 24/7</p>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Contact Information -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Informasi Kontak</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Admin</h3>
+                                    <p class="text-gray-600">Mas sybau<br>kak cisi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-phone text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Telepon</h3>
+                                    <p class="text-gray-600">+62 </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Email</h3>
+                                    <p class="text-gray-600">info@supermart.id<br>support@supermart.id</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-3 rounded-lg mr-4">
+                                    <i class="fab fa-whatsapp text-orange-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">WhatsApp</h3>
+                                    <p class="text-gray-600">+62 812 3456 7890<br>Fast Response 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <h3 class="font-semibold text-gray-800 mb-4">Jam Operasional</h3>
+                            <div class="space-y-2 text-sm text-gray-600">
+                                <div class="flex justify-between">
+                                    <span>Senin - Jumat:</span>
+                                    <span>08:00 - 22:00 WIB</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Sabtu - Minggu:</span>
+                                    <span>09:00 - 21:00 WIB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h2>
+                        <p class="text-gray-600 mb-8">Isi form di bawah ini dan tim kami akan menghubungi Anda dalam waktu 24 jam.</p>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
+                                    <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap" required>
+                                </div>
+                                <div>
+                                    <label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-2">No. Telepon *</label>
+                                    <input type="tel" id="contact-phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+62 812 3456 7890" required>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                    <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="email@contoh.com" required>
+                                </div>
+                                <div>
+                                    <label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
+                                    <select id="contact-subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        <option value="">Pilih Subjek</option>
+                                        <option value="general">Pertanyaan Umum</option>
+                                        <option value="product">Informasi Produk</option>
+                                        <option value="order">Status Pesanan</option>
+                                        <option value="complaint">Keluhan</option>
+                                        <option value="partnership">Kemitraan</option>
+                                        <option value="other">Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">Pesan *</label>
+                                <textarea id="contact-message" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tulis pesan lengkap Anda di sini..." required></textarea>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="contact-newsletter" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="contact-newsletter" class="ml-2 text-sm text-gray-600">Saya ingin menerima newsletter dan promo dari SuperMart</label>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <!-- ... footer content sama dengan index.html ... -->
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

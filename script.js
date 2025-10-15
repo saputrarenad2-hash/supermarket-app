@@ -892,3 +892,334 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initialize App ---
     fetchProducts();
 });
+
+    // Modal Tentang
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutModal = document.getElementById('about-modal');
+    const closeAboutModal = document.getElementById('close-about-modal');
+    const aboutOverlay = document.getElementById('about-overlay');
+
+    if (aboutBtn && aboutModal) {
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.classList.remove('hidden');
+        });
+        
+        closeAboutModal.addEventListener('click', () => {
+            aboutModal.classList.add('hidden');
+        });
+        
+        aboutOverlay.addEventListener('click', () => {
+            aboutModal.classList.add('hidden');
+        });
+    }
+
+    // Modal Kontak
+    const contactBtn = document.getElementById('contact-btn');
+    const contactModal = document.getElementById('contact-modal');
+    const closeContactModal = document.getElementById('close-contact-modal');
+    const contactOverlay = document.getElementById('contact-overlay');
+
+    if (contactBtn && contactModal) {
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.remove('hidden');
+        });
+        
+        closeContactModal.addEventListener('click', () => {
+            contactModal.classList.add('hidden');
+        });
+        
+        contactOverlay.addEventListener('click', () => {
+            contactModal.classList.add('hidden');
+        });
+    }
+
+    // about.js - JavaScript untuk halaman About
+
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('about-contact-form');
+    
+    // Handle form submission
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('about-name').value,
+            email: document.getElementById('about-email').value,
+            subject: document.getElementById('about-subject').value,
+            message: document.getElementById('about-message').value
+        };
+        
+        // Validate form
+        if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+            showToast('Harap isi semua field yang wajib diisi', 'error');
+            return;
+        }
+        
+        // Simulate form submission
+        simulateFormSubmission(formData);
+    });
+    
+    function simulateFormSubmission(formData) {
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengirim...';
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            // Show success message
+            showToast('Pesan berhasil dikirim! Kami akan menghubungi Anda dalam 24 jam.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Log form data (in real app, you would send this to your backend)
+            console.log('Form submitted:', formData);
+            
+        }, 2000);
+    }
+    
+    function showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toast-container') || createToastContainer();
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-exclamation-circle',
+            info: 'fa-info-circle'
+        };
+        
+        toast.innerHTML = `
+            <i class="fas ${icons[type]} text-${type === 'success' ? 'green' : type === 'error' ? 'red' : 'blue'}-500"></i>
+            <span class="flex-1">${message}</span>
+            <button class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 5000);
+        
+        // Remove on click
+        toast.querySelector('button').addEventListener('click', () => {
+            toast.remove();
+        });
+    }
+    
+    function createToastContainer() {
+        const container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-5 right-5 z-50 space-y-2';
+        document.body.appendChild(container);
+        return container;
+    }
+    
+    // Add animation to stats counters
+    animateCounters();
+    
+    function animateCounters() {
+        const counters = document.querySelectorAll('.grid .text-2xl');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.textContent);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    counter.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current) + '+';
+                }
+            }, 16);
+        });
+    }
+});
+
+    // contact.js - JavaScript untuk halaman Contact
+
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const subjectSelect = document.getElementById('contact-subject');
+    
+    // Handle form submission
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('contact-name').value,
+            phone: document.getElementById('contact-phone').value,
+            email: document.getElementById('contact-email').value,
+            subject: subjectSelect.value,
+            message: document.getElementById('contact-message').value,
+            newsletter: document.getElementById('contact-newsletter').checked
+        };
+        
+        // Validate form
+        if (!validateForm(formData)) {
+            return;
+        }
+        
+        // Submit form
+        submitContactForm(formData);
+    });
+    
+    function validateForm(formData) {
+        // Check required fields
+        if (!formData.name || !formData.phone || !formData.email || !formData.subject || !formData.message) {
+            showToast('Harap isi semua field yang wajib diisi', 'error');
+            return false;
+        }
+        
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            showToast('Format email tidak valid', 'error');
+            return false;
+        }
+        
+        // Validate phone number (simple Indonesian format)
+        const phoneRegex = /^(\+62|62|0)8[1-9][0-9]{6,9}$/;
+        if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+            showToast('Format nomor telepon tidak valid', 'error');
+            return false;
+        }
+        
+        return true;
+    }
+    
+    function submitContactForm(formData) {
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengirim...';
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            // Show success message
+            showToast('Pesan Anda berhasil dikirim! Tim kami akan menghubungi Anda segera.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Log form data
+            console.log('Contact form submitted:', formData);
+            
+            // If newsletter is checked, show additional message
+            if (formData.newsletter) {
+                setTimeout(() => {
+                    showToast('Terima kasih telah berlangganan newsletter kami!', 'info');
+                }, 1000);
+            }
+            
+        }, 2000);
+    }
+    
+    // Quick contact buttons
+    createQuickContactButtons();
+    
+    function createQuickContactButtons() {
+        const contactInfo = document.querySelector('.bg-white.rounded-2xl');
+        
+        // Add click handlers for phone numbers
+        const phoneElements = contactInfo.querySelectorAll('.fa-phone').forEach(icon => {
+            const phoneNumber = icon.parentElement.querySelector('span').textContent.trim();
+            icon.parentElement.style.cursor = 'pointer';
+            icon.parentElement.addEventListener('click', () => {
+                window.open(`tel:${phoneNumber}`, '_self');
+            });
+        });
+        
+        // Add click handlers for email
+        const emailElements = contactInfo.querySelectorAll('.fa-envelope').forEach(icon => {
+            const email = icon.parentElement.querySelector('span').textContent.trim();
+            icon.parentElement.style.cursor = 'pointer';
+            icon.parentElement.addEventListener('click', () => {
+                window.open(`mailto:${email}`, '_self');
+            });
+        });
+        
+        // Add click handlers for WhatsApp
+        const whatsappElements = contactInfo.querySelectorAll('.fa-whatsapp').forEach(icon => {
+            const phoneNumber = icon.parentElement.querySelector('span').textContent.trim().replace(/\D/g, '');
+            icon.parentElement.style.cursor = 'pointer';
+            icon.parentElement.addEventListener('click', () => {
+                const message = 'Halo SuperMart, saya ingin bertanya tentang...';
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        });
+    }
+    
+    function showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toast-container') || createToastContainer();
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-exclamation-circle',
+            info: 'fa-info-circle'
+        };
+        
+        const colors = {
+            success: 'green',
+            error: 'red',
+            info: 'blue'
+        };
+        
+        toast.innerHTML = `
+            <i class="fas ${icons[type]} text-${colors[type]}-500"></i>
+            <span class="flex-1">${message}</span>
+            <button class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 5000);
+        
+        // Remove on click
+        toast.querySelector('button').addEventListener('click', () => {
+            toast.remove();
+        });
+    }
+    
+    function createToastContainer() {
+        const container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-5 right-5 z-50 space-y-2';
+        document.body.appendChild(container);
+        return container;
+    }
+});
+
